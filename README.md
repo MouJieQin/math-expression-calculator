@@ -2,6 +2,7 @@
 math expression calculator
 刚学C++时所写，在vs2015上编译通过
 
+
 		-*-*-*-*-请使用英文输入法-*-*-*-*-*-*-*-不能有空格-*-*-*-*-*-*-*-*-*-*-*-*-*|\n"
 		<<"*|1.请使用英文输入法输入表达式                                                 *|\n"
 		<<"*|2.一个完整的表达式不能有空格和等号                                           *|\n"
@@ -21,3 +22,4 @@ math expression calculator
 		<<"*|2*anw                                                                        *|\n"
 		<<"*|anw=   9                                                                     *|\n"
 		<<"*|-*-*-*-*-*-不能有空格-*-*-*-*-*-*-*-请使用英文输入法-*-*-*-*-*-*-*-*--*-*-*-**|\n"
+![计算器](https://github.com/MouJieQin/math-expression-calculator/blob/master/calculator.jpg)

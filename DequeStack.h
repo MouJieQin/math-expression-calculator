@@ -11,10 +11,10 @@ template<typename T>
 class DequeStack {
 public:
 	DequeStack() = default;
-	void push_back(T &str) { deq.push_back(str); }
+	void push_back(const T &str) { deq.push_back(str); }
 	bool empty() { return deq.empty(); }
-	auto begin() { return deq.begin(); }
-	auto end() { return deq.end(); }
+	T begin() { return deq.begin(); }
+	T end() { return deq.end(); }
 	T& front() { return deq.front(); }
 	T& back() { return deq.back(); }
 	T pop_front() {

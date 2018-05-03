@@ -9,17 +9,17 @@
 using namespace std;
 
 /**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**/
-enum priority { Fifth_level,Fourth_level, Third_level, Second_level,First_level, Higtest };	//´æ´¢ÔËËãÓÅÏÈ¼¶
-set<string>set_operator{ "+","-","*","/","%","^","(",")","!","|",",","A","C",":"};			//´æ´¢µ¥¸ö×Ö·û³¤¶ÈµÄÔËËã·û
-static double answer=0;														//´æ´¢Ã¿´ÎÔËĞĞÊ±µÄ´ğ°¸ÒÔÓÃÓÚÏÂ´Î¼ÆËã
-const static	string error = { "-*-*-*-*-*-*-ÊäÈë´íÎó-*-*-*-*--*-*-ÇëÖØĞÂÊäÈë-*-*-*-*-*-*-\t\t :( \n" };	//´íÎóĞÅÏ¢
-bool static input_error = false;												//ÔËËã´íÎó±êÖ¾Î»
-long static GCD = 0;															//¼ÇÂ¼×î´ó¹«Ô¼Êı
+enum priority { Fifth_level,Fourth_level, Third_level, Second_level,First_level, Higtest };	//å­˜å‚¨è¿ç®—ä¼˜å…ˆçº§
+set<string>set_operator{ "+","-","*","/","%","^","(",")","!","|",",","A","C",":"};			//å­˜å‚¨å•ä¸ªå­—ç¬¦é•¿åº¦çš„è¿ç®—ç¬¦
+static double answer=0;														//å­˜å‚¨æ¯æ¬¡è¿è¡Œæ—¶çš„ç­”æ¡ˆä»¥ç”¨äºä¸‹æ¬¡è®¡ç®—
+const static	string error = { "-*-*-*-*-*-*-è¾“å…¥é”™è¯¯-*-*-*-*--*-*-è¯·é‡æ–°è¾“å…¥-*-*-*-*-*-*-\t\t :( \n" };	//é”™è¯¯ä¿¡æ¯
+bool input_error = false;												//è¿ç®—é”™è¯¯æ ‡å¿—ä½
+long GCD = 0;															//è®°å½•æœ€å¤§å…¬çº¦æ•°
 /**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**/
 /*
-*Ôö¼ÓÔËËã·ûĞèÒªÔÚÏÂÃæ¼ÓÈëÓÅÏÈ¼¶
+*å¢åŠ è¿ç®—ç¬¦éœ€è¦åœ¨ä¸‹é¢åŠ å…¥ä¼˜å…ˆçº§
 */
-map<string, priority>map_priority{												//´æ´¢ÔËËãÓÅÏÈ¼¶map
+map<string, priority>map_priority{												//å­˜å‚¨è¿ç®—ä¼˜å…ˆçº§map
 	{"+",Fifth_level },{ "-",Fifth_level },{ ",",Fifth_level },
 	{"*",Fourth_level } ,{"/",Fourth_level } ,{ "%",Fourth_level },{":",Fourth_level },
 	{ "sin",Third_level },{ "cos",Third_level },{ "tan",Third_level },
@@ -33,10 +33,10 @@ map<string, priority>map_priority{												//´æ´¢ÔËËãÓÅÏÈ¼¶map
 };
 /**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**/
 
-void read_infix(istream &in, DequeStack<string>&dequeStack_operator_operand) {		//¶ÁÈ¡ÖĞ×º±í´ïÊ½
+void read_infix(istream &in, DequeStack<string>&dequeStack_operator_operand) {		//è¯»å–ä¸­ç¼€è¡¨è¾¾å¼
 	string str_expression;
 	while (in >> str_expression) {
-		while (!str_expression.empty()) {				//×Ö·û´®±í´ïÊ½Îª¿ÕÊ±ÍË³öÑ­»·
+		while (!str_expression.empty()) {				//å­—ç¬¦ä¸²è¡¨è¾¾å¼ä¸ºç©ºæ—¶é€€å‡ºå¾ªç¯
 			try {
 				for (const auto &i : str_expression)
 					if (i < -1 || i>255) {
@@ -46,39 +46,39 @@ void read_infix(istream &in, DequeStack<string>&dequeStack_operator_operand) {		
 			}
 			catch (string err) {
 				cerr <<'"'<< err<<'"'
-					<< "ÊÇ²»¼æÈİ×Ö·û£¬ÇëÊ¹ÓÃÓ¢ÎÄÊäÈë·¨!\t\t:>\n";
+					<< "æ˜¯ä¸å…¼å®¹å­—ç¬¦ï¼Œè¯·ä½¿ç”¨è‹±æ–‡è¾“å…¥æ³•!\t\t:>\n";
 				break;
 			}
-			if (isdigit(str_expression.front())) {		//±í´ïÊ½Ê××Ö·ûÎªÊı×ÖÊ±
+			if (isdigit(str_expression.front())) {		//è¡¨è¾¾å¼é¦–å­—ç¬¦ä¸ºæ•°å­—æ—¶
 				size_t index = 0;
-				double operand = stod(str_expression, &index);	//½«Êı×Ö×Ö·û´®×ª±äÎªdouble£¬index ±£´æµÚÒ»¸ö²»ÊÇÊı×ÖµÄÏÂ±ê
-				dequeStack_operator_operand.push_back(to_string(operand));	//Ñ¹Èë²Ù×÷ÊıDequeStack<string>
-				str_expression = str_expression.substr(index);	//½«±í´ïÊ½½Ø³ı×ª±äÎªdoubleµÄÊı×Ö×Ö·û´®
+				double operand = stod(str_expression, &index);	//å°†æ•°å­—å­—ç¬¦ä¸²è½¬å˜ä¸ºdoubleï¼Œindex ä¿å­˜ç¬¬ä¸€ä¸ªä¸æ˜¯æ•°å­—çš„ä¸‹æ ‡
+				dequeStack_operator_operand.push_back(to_string(operand));	//å‹å…¥æ“ä½œæ•°DequeStack<string>
+				str_expression = str_expression.substr(index);	//å°†è¡¨è¾¾å¼æˆªé™¤è½¬å˜ä¸ºdoubleçš„æ•°å­—å­—ç¬¦ä¸²
 			}
-			else {											//Ê××Ö·û²»ÊÇÊı×Ö
-				string key = "";						//set.find()²»ÄÜ²éÕÒchar
+			else {											//é¦–å­—ç¬¦ä¸æ˜¯æ•°å­—
+				string key = "";						//set.find()ä¸èƒ½æŸ¥æ‰¾char
 				key = str_expression.front() + key;
-				if (set_operator.find(key) == set_operator.end()) {		//±í´ïÊ½Ê××Ö·û²»ÔÚ²Ù×÷·ûsetÖĞ
+				if (set_operator.find(key) == set_operator.end()) {		//è¡¨è¾¾å¼é¦–å­—ç¬¦ä¸åœ¨æ“ä½œç¬¦setä¸­
 					string temp = "";
 					size_t index = 0;
 					while (
-						index!=str_expression.size()					//È·±£Ë÷ÒıÔÚ·¶Î§ÄÚ
-						&& !isdigit(str_expression[index])				//Ë÷Òı³öµÄ²»ÊÇÊı×Ö
-						&& set_operator.find(key) == set_operator.end()	//Ë÷Òı³öµÄ²»ÔÚ²Ù×÷·ûsetÖĞ
+						index!=str_expression.size()					//ç¡®ä¿ç´¢å¼•åœ¨èŒƒå›´å†…
+						&& !isdigit(str_expression[index])				//ç´¢å¼•å‡ºçš„ä¸æ˜¯æ•°å­—
+						&& set_operator.find(key) == set_operator.end()	//ç´¢å¼•å‡ºçš„ä¸åœ¨æ“ä½œç¬¦setä¸­
 						) {
-						temp += str_expression[index++];				//µİÔöË÷ÒıÌáÈ¡×Ö·û
+						temp += str_expression[index++];				//é€’å¢ç´¢å¼•æå–å­—ç¬¦
 						key = "";
 						key = str_expression[index] + key;
 					}
 		
-					if(temp=="pi")dequeStack_operator_operand.push_back(to_string(3.1416));	//Ö§³ÖµÄÌØÊâ²Ù×÷·û				
+					if(temp=="pi")dequeStack_operator_operand.push_back(to_string(3.1416));	//æ”¯æŒçš„ç‰¹æ®Šæ“ä½œç¬¦				
 					else if (temp == "e")dequeStack_operator_operand.push_back(to_string(2.7183));
 					else if(temp=="anw")dequeStack_operator_operand.push_back(to_string(answer));
 					else
-						dequeStack_operator_operand.push_back(temp);	//Ñ¹Èë²Ù×÷·ûDequeStack<string>						
-					str_expression = str_expression.substr(index);		//½ØÈ¡±í´ïÊ½
+						dequeStack_operator_operand.push_back(temp);	//å‹å…¥æ“ä½œç¬¦DequeStack<string>						
+					str_expression = str_expression.substr(index);		//æˆªå–è¡¨è¾¾å¼
 				}
-				else {												//Ê××Ö·ûÔÚ²Ù×÷·ûset_operatorÖĞ
+				else {												//é¦–å­—ç¬¦åœ¨æ“ä½œç¬¦set_operatorä¸­
 					string temp = "";
 					temp = str_expression.front() + temp;
 					dequeStack_operator_operand.push_back(temp);
@@ -91,21 +91,21 @@ void read_infix(istream &in, DequeStack<string>&dequeStack_operator_operand) {		
 	in.clear();
 }
 
-void trans_posfix(DequeStack<string>&infix, DequeStack<string>&postfix) {	//½«ÖĞ×º±í´ïÊ½×ª»»Îªºó×º±í´ïÊ½
-	DequeStack<string>priority_operator;							//´æ´¢ÁÙÊ±²Ù×÷·ûÓÃÓÚ±È½ÏÓÅÏÈ¼¶
+void trans_posfix(DequeStack<string>&infix, DequeStack<string>&postfix) {	//å°†ä¸­ç¼€è¡¨è¾¾å¼è½¬æ¢ä¸ºåç¼€è¡¨è¾¾å¼
+	DequeStack<string>priority_operator;							//å­˜å‚¨ä¸´æ—¶æ“ä½œç¬¦ç”¨äºæ¯”è¾ƒä¼˜å…ˆçº§
 	while (!infix.empty()) {		
 		string first_element = infix.pop_front();	
-		if (map_priority.find(first_element) == map_priority.end()) 	//Ê×ÔªËØ²»ÊÇÖ§³ÖµÄ²Ù×÷·û¶øÊÇ²Ù×÷Êı
+		if (map_priority.find(first_element) == map_priority.end()) 	//é¦–å…ƒç´ ä¸æ˜¯æ”¯æŒçš„æ“ä½œç¬¦è€Œæ˜¯æ“ä½œæ•°
 			postfix.push_back(first_element);
-		else {														//Ê×ÔªËØÊÇÖ§³ÖµÄ²Ù×÷·û			
-			if (first_element == "(") {								//Ê×ÔªËØÊÇ"("
-				if (infix.front() == "-") {							//´¦Àí¸ºÊıµÄ¼õºÅÊÇÒ»ÔªÔËËã·ûµÄÇé¿ö
-					infix.pop_front();								//"("À¨ºÅºóÊÇ¸ººÅµÄÎª¸ºÊı
+		else {														//é¦–å…ƒç´ æ˜¯æ”¯æŒçš„æ“ä½œç¬¦			
+			if (first_element == "(") {								//é¦–å…ƒç´ æ˜¯"("
+				if (infix.front() == "-") {							//å¤„ç†è´Ÿæ•°çš„å‡å·æ˜¯ä¸€å…ƒè¿ç®—ç¬¦çš„æƒ…å†µ
+					infix.pop_front();								//"("æ‹¬å·åæ˜¯è´Ÿå·çš„ä¸ºè´Ÿæ•°
 					infix.front() = "-" + infix.front();
 					}
-					priority_operator.push_back(first_element);		//ÊÇ"("Ê±Ñ¹ÈëÕ»ÖĞ
+					priority_operator.push_back(first_element);		//æ˜¯"("æ—¶å‹å…¥æ ˆä¸­
 				}
-				else if(first_element==")")				//Ê×ÔªËØÊÇ")"Ê±Ö±µ½Óöµ½"("²ÅÍ£Ö¹µ¯³ö£¬()²»Ñ¹Èëºó×º±í´ïÊ½
+				else if(first_element==")")				//é¦–å…ƒç´ æ˜¯")"æ—¶ç›´åˆ°é‡åˆ°"("æ‰åœæ­¢å¼¹å‡ºï¼Œ()ä¸å‹å…¥åç¼€è¡¨è¾¾å¼
 					while (!priority_operator.empty()){						 
 						string temp_operator = priority_operator.pop_back();
 						if (temp_operator != "(") 
@@ -114,17 +114,17 @@ void trans_posfix(DequeStack<string>&infix, DequeStack<string>&postfix) {	//½«ÖĞ
 							break;
 					}
 
-				else {									//Ê×ÔªËØ²»ÊÇ"("»ò")"
-					if (first_element == ",") {								//Ê×ÔªËØÊÇ","
-						if (infix.front() == "-") {							//´¦Àí¸ºÊıµÄ¼õºÅÊÇÒ»ÔªÔËËã·ûµÄÇé¿ö
-							infix.pop_front();								//","À¨ºÅºóÊÇ¸ººÅµÄÎª¸ºÊı
+				else {									//é¦–å…ƒç´ ä¸æ˜¯"("æˆ–")"
+					if (first_element == ",") {								//é¦–å…ƒç´ æ˜¯","
+						if (infix.front() == "-") {							//å¤„ç†è´Ÿæ•°çš„å‡å·æ˜¯ä¸€å…ƒè¿ç®—ç¬¦çš„æƒ…å†µ
+							infix.pop_front();								//","æ‹¬å·åæ˜¯è´Ÿå·çš„ä¸ºè´Ÿæ•°
 							infix.front() = "-" + infix.front();		
 						}
 					}
 					else {
-						while (!priority_operator.empty()	//½«ÁÙÊ±²Ù×÷·ûÕ»ËùÓĞÓÅÏÈ¼¶´óÓÚµÈÓÚÊ×ÔªËØ²Ù×÷·ûµÄ²Ù×÷·ûµ¯³ö²¢Ñ¹Èëºó×º±í´ïÊ½
+						while (!priority_operator.empty()	//å°†ä¸´æ—¶æ“ä½œç¬¦æ ˆæ‰€æœ‰ä¼˜å…ˆçº§å¤§äºç­‰äºé¦–å…ƒç´ æ“ä½œç¬¦çš„æ“ä½œç¬¦å¼¹å‡ºå¹¶å‹å…¥åç¼€è¡¨è¾¾å¼
 							&& map_priority[first_element] <= map_priority[priority_operator.back()]
-							&& priority_operator.back() != "(") {	//"("Ö»ÔÚÓöµ½")"²Åµ¯³ö
+							&& priority_operator.back() != "(") {	//"("åªåœ¨é‡åˆ°")"æ‰å¼¹å‡º
 							postfix.push_back(priority_operator.pop_back());
 						}
 						priority_operator.push_back(first_element);
@@ -136,15 +136,15 @@ void trans_posfix(DequeStack<string>&infix, DequeStack<string>&postfix) {	//½«ÖĞ
 		postfix.push_back(priority_operator.pop_back());
 }
 
-pair<bool,double> calculat_postfix(DequeStack<string>&postfix,				//¼ÆËãºó×º±í´ïÊ½
-	map < string, function<double(double, double)>>&map_binary_operator,		//¶şÔªÔËËã·ûmap
-	map<string, function<double(double)>>&map_unary_operator) {				//Ò»ÔªÔËËã·ûmap
+pair<bool,double> calculat_postfix(DequeStack<string>&postfix,				//è®¡ç®—åç¼€è¡¨è¾¾å¼
+	map < string, function<double(double, double)>>&map_binary_operator,		//äºŒå…ƒè¿ç®—ç¬¦map
+	map<string, function<double(double)>>&map_unary_operator) {				//ä¸€å…ƒè¿ç®—ç¬¦map
 	DequeStack<double>temp_stack;
 	while (!postfix.empty()) {
 		string temp_operator_operand = postfix.pop_front();
-		if (map_unary_operator.find(temp_operator_operand) != map_unary_operator.end()) {	//µ¯³ö²Ù×÷·ûÎªÒ»Ôª²Ù×÷·û
+		if (map_unary_operator.find(temp_operator_operand) != map_unary_operator.end()) {	//å¼¹å‡ºæ“ä½œç¬¦ä¸ºä¸€å…ƒæ“ä½œç¬¦
 			try {
-				if (temp_stack.empty()) 			//ÁÙÊ±Õ»¿ÕÁË»¹ÓĞ²Ù×÷·ûÃ»ÓÃÍê
+				if (temp_stack.empty()) 			//ä¸´æ—¶æ ˆç©ºäº†è¿˜æœ‰æ“ä½œç¬¦æ²¡ç”¨å®Œ
 					throw temp_operator_operand;
 				else {
 					double operand = temp_stack.pop_back();
@@ -154,41 +154,41 @@ pair<bool,double> calculat_postfix(DequeStack<string>&postfix,				//¼ÆËãºó×º±í´ï
 			}
 			catch (string err) {
 				cerr << '"' << err << '"'
-					<< "¸½½üÊÇ·ñÈ±ÉÙÀ¨ºÅ!\t\t:>\n"
-					<<"¾¯¸æ:²Ù×÷·ûÌ«¶à!!!\t\t:<"
+					<< "é™„è¿‘æ˜¯å¦ç¼ºå°‘æ‹¬å·!\t\t:>\n"
+					<<"è­¦å‘Š:æ“ä½œç¬¦å¤ªå¤š!!!\t\t:<"
 					<< endl;
-				input_error = true;										//ÊäÈë´íÎó±êÖ¾Î»ÖÃÎ»
+				input_error = true;										//è¾“å…¥é”™è¯¯æ ‡å¿—ä½ç½®ä½
 				break;
 			}
 		}
-		else if (map_binary_operator.find(temp_operator_operand) != map_binary_operator.end()) { //µ¯³ö²Ù×÷·ûÎª¶şÔª²Ù×÷·û
+		else if (map_binary_operator.find(temp_operator_operand) != map_binary_operator.end()) { //å¼¹å‡ºæ“ä½œç¬¦ä¸ºäºŒå…ƒæ“ä½œç¬¦
 			double answer_operand = 0;
 			double second_operand = 0;
 			try {
 				if (temp_stack.empty()) 
 					throw temp_operator_operand;
 				else 
-					second_operand = temp_stack.pop_back();			//µ¯³ö¶şÔª²Ù×÷·ûµÄµÚ¶ş¸ö²Ù×÷Êı	
+					second_operand = temp_stack.pop_back();			//å¼¹å‡ºäºŒå…ƒæ“ä½œç¬¦çš„ç¬¬äºŒä¸ªæ“ä½œæ•°	
 			}
 			catch (string err) {
 				cerr << '"' << err << '"'
-					<< "¸½½üÊÇ·ñÈ±ÉÙÀ¨ºÅ!\t\t:>\n"
-					<< "¾¯¸æ:²Ù×÷·ûÌ«¶à!!!\t\t:<"
+					<< "é™„è¿‘æ˜¯å¦ç¼ºå°‘æ‹¬å·!\t\t:>\n"
+					<< "è­¦å‘Š:æ“ä½œç¬¦å¤ªå¤š!!!\t\t:<"
 					<< endl;
 				input_error = true;
 				break;
 			}
 			if (temp_stack.empty()) {
 				try {
-					if (temp_operator_operand == "-")			//´¦Àí±í´ïÊ½µÚÒ»¸öÎª¸ºÊıµÄ¼õºÅ£¬´ËÊ±¼õºÅÎªÒ»ÔªÔËËã·û
+					if (temp_operator_operand == "-")			//å¤„ç†è¡¨è¾¾å¼ç¬¬ä¸€ä¸ªä¸ºè´Ÿæ•°çš„å‡å·ï¼Œæ­¤æ—¶å‡å·ä¸ºä¸€å…ƒè¿ç®—ç¬¦
 						answer_operand = -second_operand;
 					else
 						throw temp_operator_operand;
 				}
 				catch (string err) {
 					cerr << '"' << err << '"'
-						<< "¸½½üÊÇ·ñÈ±ÉÙÀ¨ºÅ!\t\t:>\n"
-						<< "¾¯¸æ:²Ù×÷·ûÌ«¶à!!!\t\t:<"
+						<< "é™„è¿‘æ˜¯å¦ç¼ºå°‘æ‹¬å·!\t\t:>\n"
+						<< "è­¦å‘Š:æ“ä½œç¬¦å¤ªå¤š!!!\t\t:<"
 						<< endl;
 					input_error = true;
 					break;
@@ -200,17 +200,17 @@ pair<bool,double> calculat_postfix(DequeStack<string>&postfix,				//¼ÆËãºó×º±í´ï
 			}
 			temp_stack.push_back(answer_operand);
 		}
-		else {																	//µ¯³öÎª²Ù×÷Êı×Ö·û´®
+		else {																	//å¼¹å‡ºä¸ºæ“ä½œæ•°å­—ç¬¦ä¸²
 			try {
-				double operand = 0;												//´æ·Å²Ù×÷Êı
-				if (temp_operator_operand.find_first_of("+-.0123456789") == string::npos)//²Ù×÷Êı²»ÎªÊı×Ö±íÃ÷ÊäÈë´íÎó
+				double operand = 0;												//å­˜æ”¾æ“ä½œæ•°
+				if (temp_operator_operand.find_first_of("+-.0123456789") == string::npos)//æ“ä½œæ•°ä¸ä¸ºæ•°å­—è¡¨æ˜è¾“å…¥é”™è¯¯
 					throw  temp_operator_operand;
-				operand = stod(temp_operator_operand);							//×ª»»ÎªÊı×Ö
-				temp_stack.push_back(operand);									//Ñ¹ÈëÁÙÊ±¼ÆËãÕ»
+				operand = stod(temp_operator_operand);							//è½¬æ¢ä¸ºæ•°å­—
+				temp_stack.push_back(operand);									//å‹å…¥ä¸´æ—¶è®¡ç®—æ ˆ
 			}
 			catch (string err) {
 				cerr << '"' << err << '"'
-					<< "ÊÇ²»Ö§³Ö²Ù×÷·û»òÓë²Ù×÷Êı²»Æ¥Åä!!!\t\t:<"
+					<< "æ˜¯ä¸æ”¯æŒæ“ä½œç¬¦æˆ–ä¸æ“ä½œæ•°ä¸åŒ¹é…!!!\t\t:<"
 					<< endl;  
 				input_error = true;
 				break;
@@ -218,28 +218,28 @@ pair<bool,double> calculat_postfix(DequeStack<string>&postfix,				//¼ÆËãºó×º±í´ï
 		}
 	}
 	if (input_error || temp_stack.empty()
-		|| temp_stack.front() != temp_stack.back()) {//È·±£ÁÙÊ±¼ÆËãÕ»ÖĞÖ»Ê£ÏÂÎ¨Ò»Êı×Ö£¬·ñÔòÔËËã´íÎó
+		|| temp_stack.front() != temp_stack.back()) {//ç¡®ä¿ä¸´æ—¶è®¡ç®—æ ˆä¸­åªå‰©ä¸‹å”¯ä¸€æ•°å­—ï¼Œå¦åˆ™è¿ç®—é”™è¯¯
 		if(!input_error)
-			cerr << "²Ù×÷ÊıÌ«¶à!!!\t\t:<" << endl;
+			cerr << "æ“ä½œæ•°å¤ªå¤š!!!\t\t:<" << endl;
 		input_error = true;
 		return make_pair(!input_error, 0.0);
 	}
 		
-	return make_pair(!input_error, temp_stack.pop_back());					//·µ»ØÔËËã´íÎó±êÖ¾Î»ºÍ½á¹û
+	return make_pair(!input_error, temp_stack.pop_back());					//è¿”å›è¿ç®—é”™è¯¯æ ‡å¿—ä½å’Œç»“æœ
 }
 
-void output_answer(pair<bool, double>&pair_answer,							//´¦Àí´íÎó²¢Êä³ö´ğ°¸
+void output_answer(const pair<bool, double>&pair_answer,							//å¤„ç†é”™è¯¯å¹¶è¾“å‡ºç­”æ¡ˆ
 	DequeStack<string>&infix, DequeStack<string>&postfix) {	
-	if (pair_answer.first) {												//ÔËËãÕıÈ·
+	if (pair_answer.first) {												//è¿ç®—æ­£ç¡®
 		answer = pair_answer.second;
 		cout << "\t\tanw= \t"
 			<< answer<< "\t\t :)"<<endl;
 	}
 	else {
-		input_error = false;										//ÔËËã´íÎó
-		while (!postfix.empty())									//ÊÍ·Å´æ´¢µÄºó×º±í´ïÊ½²ÅÄÜÖØĞÂÓÃÓÚÏÂ´Î¼ÆËã
+		input_error = false;										//è¿ç®—é”™è¯¯
+		while (!postfix.empty())									//é‡Šæ”¾å­˜å‚¨çš„åç¼€è¡¨è¾¾å¼æ‰èƒ½é‡æ–°ç”¨äºä¸‹æ¬¡è®¡ç®—
 			postfix.pop_back();									
-		while (!infix.empty())									//ÊÍ·Å´æ´¢µÄÖĞ×º±í´ïÊ½²ÅÄÜÖØĞÂÓÃÓÚÏÂ´Î¼ÆËã
+		while (!infix.empty())									//é‡Šæ”¾å­˜å‚¨çš„ä¸­ç¼€è¡¨è¾¾å¼æ‰èƒ½é‡æ–°ç”¨äºä¸‹æ¬¡è®¡ç®—
 			infix.pop_back();
 		cerr << error << endl;
 	}

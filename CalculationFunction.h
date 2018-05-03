@@ -7,31 +7,31 @@
 
 using namespace std;
 
-void print_help() {															//´òÓ¡°ïÖú
-	cout <<"*|-*-*-*-*-*-ÇëÊ¹ÓÃÓ¢ÎÄÊäÈë·¨-*-*-*-*-*-*-*-²»ÄÜÓĞ¿Õ¸ñ-*-*-*-*-*-*-*-*-*-*-*-*-*|\n"
-		<<"*|1.ÇëÊ¹ÓÃÓ¢ÎÄÊäÈë·¨ÊäÈë±í´ïÊ½                                                 *|\n"
-		<<"*|2.Ò»¸öÍêÕûµÄ±í´ïÊ½²»ÄÜÓĞ¿Õ¸ñºÍµÈºÅ                                           *|\n"
-		<<"*|3.Çë¿´µÚÒ»Ìõ                                                                 *|\n"
-		<<"*|Ö§³ÖµÄÔËËã·ûÓĞ:                                                              *|\n"
-		<<"*|+ - * / %(È¡Óà)  : (¿ÉÓÃÓÚÇó×î´ó¹«Òò×Ó»¯¼ò·ÖÊı)                              *|\n"
-		<<"*|!(½×³Ë)  |()(È¡À¨ºÅÖĞ¾ø¶ÔÖµ)  ^(Ö¸ÊıÔËËã£¬¿ÉÊ¹ÓÃ¸Ã·ûºÅ¿ª¸ùºÅ)                *|\n"
-		<<"*|sin cos tan asin(·´Èı½Çº¯Êı) acos atan pi(3.1416) e(2.7183)  ln(¶ÔÊı)        *|\n"
-		<<"*|sin_ cos_ tan_ asin_ acos_ atan_ ´øÏÂ»®ÏßÕı·´Èı½Çº¯ÊıÊ¹ÓÃ½Ç¶È,²»´øÊ¹ÓÃ»¡¶È   *|\n"
-		<<"*|A(n,m) (n>=m,ÅÅÁĞ²Ù×÷·û)  C(n,m)(n>=m£¬×éºÏ²Ù×÷·û)                           *|\n"
-		<<"*|Ê¾ÀıÈçÏÂ:                                                                    *|\n"
-		<<"*|ÊäÈë:                                                                        *|\n"
+void print_help() {															//æ‰“å°å¸®åŠ©
+	cout <<"*|-*-*-*-*-*-è¯·ä½¿ç”¨è‹±æ–‡è¾“å…¥æ³•-*-*-*-*-*-*-*-ä¸èƒ½æœ‰ç©ºæ ¼-*-*-*-*-*-*-*-*-*-*-*-*-*|\n"
+		<<"*|1.è¯·ä½¿ç”¨è‹±æ–‡è¾“å…¥æ³•è¾“å…¥è¡¨è¾¾å¼                                                 *|\n"
+		<<"*|2.ä¸€ä¸ªå®Œæ•´çš„è¡¨è¾¾å¼ä¸èƒ½æœ‰ç©ºæ ¼å’Œç­‰å·                                           *|\n"
+		<<"*|3.è¯·çœ‹ç¬¬ä¸€æ¡                                                                 *|\n"
+		<<"*|æ”¯æŒçš„è¿ç®—ç¬¦æœ‰:                                                              *|\n"
+		<<"*|+ - * / %(å–ä½™)  : (å¯ç”¨äºæ±‚æœ€å¤§å…¬å› å­åŒ–ç®€åˆ†æ•°)                              *|\n"
+		<<"*|!(é˜¶ä¹˜)  |()(å–æ‹¬å·ä¸­ç»å¯¹å€¼)  ^(æŒ‡æ•°è¿ç®—ï¼Œå¯ä½¿ç”¨è¯¥ç¬¦å·å¼€æ ¹å·)                *|\n"
+		<<"*|sin cos tan asin(åä¸‰è§’å‡½æ•°) acos atan pi(3.1416) e(2.7183)  ln(å¯¹æ•°)        *|\n"
+		<<"*|sin_ cos_ tan_ asin_ acos_ atan_ å¸¦ä¸‹åˆ’çº¿æ­£åä¸‰è§’å‡½æ•°ä½¿ç”¨è§’åº¦,ä¸å¸¦ä½¿ç”¨å¼§åº¦   *|\n"
+		<<"*|A(n,m) (n>=m,æ’åˆ—æ“ä½œç¬¦)  C(n,m)(n>=mï¼Œç»„åˆæ“ä½œç¬¦)                           *|\n"
+		<<"*|ç¤ºä¾‹å¦‚ä¸‹:                                                                    *|\n"
+		<<"*|è¾“å…¥:                                                                        *|\n"
 		<<"*|8*(3-3)+sin(|(-pi/2))*sin_(30)+0.5*2^3                                       *|\n"
-		<<"*|Êä³ö:                                                                        *|\n"
+		<<"*|è¾“å‡º:                                                                        *|\n"
 		<<"*|anw=     4.5                                                                 *|\n"
-		<<"*|anw ¿ÉÓÃÓÚ±í´ïÊ½,Ê¾Àı:                                                       *|\n"
+		<<"*|anw å¯ç”¨äºè¡¨è¾¾å¼,ç¤ºä¾‹:                                                       *|\n"
 		<<"*|2*anw                                                                        *|\n"
 		<<"*|anw=   9                                                                     *|\n"
-		<<"*|-*-*-*-*-*-²»ÄÜÓĞ¿Õ¸ñ-*-*-*-*-*-*-*-ÇëÊ¹ÓÃÓ¢ÎÄÊäÈë·¨-*-*-*-*-*-*-*-*--*-*-*-**|\n"
+		<<"*|-*-*-*-*-*-ä¸èƒ½æœ‰ç©ºæ ¼-*-*-*-*-*-*-*-è¯·ä½¿ç”¨è‹±æ–‡è¾“å…¥æ³•-*-*-*-*-*-*-*-*--*-*-*-**|\n"
 		<<endl;
 }
 /**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**/
 /*
-*µ¥ÔªÔËËã·ûÔ­º¯Êı
+*å•å…ƒè¿ç®—ç¬¦åŸå‡½æ•°
 */
 extern bool input_error;
 extern long GCD;
@@ -50,24 +50,24 @@ function<double(double)>f_asin_ = [](double hs) {return asin(hs)*ang; };
 function<double(double)>f_acos_ = [](double hs) {return acos(hs)*ang; };
 function<double(double)>f_atan_ = [](double hs) {return atan(hs)*ang; };
 long fact(long hs) { return hs <= 1 ? 1 : hs*fact(hs - 1); }							
-function<double(double)>f_fact = [](double hs) {return fact(static_cast<long>(hs)); };   //½×³ËÔËËã
+function<double(double)>f_fact = [](double hs) {return fact(static_cast<long>(hs)); };   //é˜¶ä¹˜è¿ç®—
 function<double(double)>f_ln = [](double hs) {return log(hs); };
 function<double(double)>f_abs = [](double hs) {return hs > 0 ? hs : -hs; };
 /**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**/
 /*
-*Ë«ÔªÔËËã·ûÔ­º¯Êı
+*åŒå…ƒè¿ç®—ç¬¦åŸå‡½æ•°
 */
 function<double(double, double)>f_plus = [](double lhs, double rhs) {return lhs + rhs; };
 function<double(double, double)>f_minus = [](double lhs, double rhs) {return lhs - rhs; };
 function<double(double, double)>f_multi = [](double lhs, double rhs) {return lhs*rhs; };
-function<double(double, double)>f_divi = [](double lhs, double rhs) {if (!rhs) { cerr << "¾¯¸æ:³ıÊı²»ÄÜÎªÁã!\t\t:>" << endl; input_error =true; return 0.0; } return  lhs / rhs; };
+function<double(double, double)>f_divi = [](double lhs, double rhs) {if (!rhs) { cerr << "è­¦å‘Š:é™¤æ•°ä¸èƒ½ä¸ºé›¶!\t\t:>" << endl; input_error =true; return 0.0; } return  lhs / rhs; };
 function<double(double, double)>f_modu = [](double lhs, double rhs){return static_cast<int>(lhs) % static_cast<int>(rhs); };
 function<double(double, double)>f_pow = [](double lhs, double rhs) {return pow(lhs, rhs); };
-long fact_A(long lhs, long rhs) { if (lhs < rhs||lhs<=0||rhs<=0) { cerr << "¾¯¸æ:ÅÅÁĞ×éºÏ×ó²Ù×÷Êı²»ÄÜĞ¡ÓÚÓÒ²Ù×÷ÊıÇÒ±ØĞë´óÓÚ0!\t\t:<" << endl; input_error = true; return 1; }return lhs == rhs ? lhs : lhs*fact_A(lhs - 1, rhs); };
-function<double(double, double)>f_arrange = [](double lhs, double rhs) {return fact_A(static_cast<long>(lhs), static_cast<long>(lhs) - static_cast<long>(rhs) +1); };//ÅÅÁĞº¯Êı
-function<double(double, double)>f_comb = [](double lhs, double rhs) ->double{return f_arrange(lhs, rhs) / f_fact(rhs); };//×éºÏº¯Êı
-long common(long lhs, long rhs) { if (!rhs){cerr << "¾¯¸æ:³ıÊı²»ÄÜÎªÁã!\t\t:>" << endl; input_error = true; return 0; }auto mod = lhs%rhs; return !mod ? rhs : common(rhs, mod); };
-function<double(double, double)>f_comp = [](double lhs, double rhs) {if(rhs!=0)cout << "\t\tGCD=\t" << (lhs > rhs ? common(static_cast<long>(lhs), static_cast<long>(rhs)) : common(static_cast<long>(rhs), static_cast<long>(lhs))) << "\t\t:>"<<endl; return f_divi(lhs, rhs); };//Çó±Èº¯Êı
+long fact_A(long lhs, long rhs) { if (lhs < rhs||lhs<=0||rhs<=0) { cerr << "è­¦å‘Š:æ’åˆ—ç»„åˆå·¦æ“ä½œæ•°ä¸èƒ½å°äºå³æ“ä½œæ•°ä¸”å¿…é¡»å¤§äº0!\t\t:<" << endl; input_error = true; return 1; }return lhs == rhs ? lhs : lhs*fact_A(lhs - 1, rhs); };
+function<double(double, double)>f_arrange = [](double lhs, double rhs) {return fact_A(static_cast<long>(lhs), static_cast<long>(lhs) - static_cast<long>(rhs) +1); };//æ’åˆ—å‡½æ•°
+function<double(double, double)>f_comb = [](double lhs, double rhs) ->double{return f_arrange(lhs, rhs) / f_fact(rhs); };//ç»„åˆå‡½æ•°
+long common(long lhs, long rhs) { if (!rhs){cerr << "è­¦å‘Š:é™¤æ•°ä¸èƒ½ä¸ºé›¶!\t\t:>" << endl; input_error = true; return 0; }auto mod = lhs%rhs; return !mod ? rhs : common(rhs, mod); };
+function<double(double, double)>f_comp = [](double lhs, double rhs) {if(rhs!=0)cout << "\t\tGCD=\t" << (lhs > rhs ? common(static_cast<long>(lhs), static_cast<long>(rhs)) : common(static_cast<long>(rhs), static_cast<long>(lhs))) << "\t\t:>"<<endl; return f_divi(lhs, rhs); };//æ±‚æ¯”å‡½æ•°
 /**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**/
 
 void map_insert_fun(map < string, function<double(double, double)>>&map_binary_operator,

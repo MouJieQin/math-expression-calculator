@@ -36,7 +36,7 @@ bool input_expr(istream &is, double &lhs, string &operate, double &rhs) {
 	if (!is) {
 		is.clear();
 		is.ignore(100, '\n');
-		cerr << "-*-*-*-*-ÊäÈë´íÎó-*-*-*-*-×¢Òâ¿Õ¸ñ-*-*-*-*-¿ÉÄÜ²»Ö§³Ö¸ÃÔËËã·û-*-*-*-*-ÇëÊ¹ÓÃÓ¢ÎÄÊäÈë·¨-*-*-*-*-ÇëÖØÐÂÊäÈë-*-*-*-*-" << endl;
+		cerr << "-*-*-*-*-è¾“å…¥é”™è¯¯-*-*-*-*-æ³¨æ„ç©ºæ ¼-*-*-*-*-å¯èƒ½ä¸æ”¯æŒè¯¥è¿ç®—ç¬¦-*-*-*-*-è¯·ä½¿ç”¨è‹±æ–‡è¾“å…¥æ³•-*-*-*-*-è¯·é‡æ–°è¾“å…¥-*-*-*-*-" << endl;
 		return  false;
 	}
 	return true;
@@ -44,7 +44,7 @@ bool input_expr(istream &is, double &lhs, string &operate, double &rhs) {
 
 void output_anw(ostream &os,map<string,function<double(double,double)>>&map_clacu, double &lhs, string &operate, double &rhs,double &result) {
 	if(map_clacu.find(operate)==map_clacu.end())
-		cerr << "-*-*-*-*-ÊäÈë´íÎó-*-*-*-*-×¢Òâ¿Õ¸ñ-*-*-*-*-¿ÉÄÜ²»Ö§³Ö¸ÃÔËËã·û-*-*-*-*-ÇëÊ¹ÓÃÓ¢ÎÄÊäÈë·¨-*-*-*-*-ÇëÖØÐÂÊäÈë-*-*-*-*-" << endl;
+		cerr << "-*-*-*-*-è¾“å…¥é”™è¯¯-*-*-*-*-æ³¨æ„ç©ºæ ¼-*-*-*-*-å¯èƒ½ä¸æ”¯æŒè¯¥è¿ç®—ç¬¦-*-*-*-*-è¯·ä½¿ç”¨è‹±æ–‡è¾“å…¥æ³•-*-*-*-*-è¯·é‡æ–°è¾“å…¥-*-*-*-*-" << endl;
 	else {
 		result = map_clacu[operate](lhs, rhs);
 		os << "\t" << "r=" << "\t" << result << endl;

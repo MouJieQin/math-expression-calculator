@@ -7,17 +7,17 @@
 using namespace std;
 
 int main() {
-	map < string, function<double(double, double)>>map_binary_operator;		//´æ´¢¶şÔªÔËËã·ûmap
-	map < string, function<double(double)>>map_unary_operator;				//´¢´æÒ»ÔªÔËËã·ûmap
-	map_insert_fun(map_binary_operator, map_unary_operator);					//½«º¯Êı²åÈëmap
-	DequeStack<string>infix;												//ÖĞÖµ±í´ïÊ½
-	DequeStack<string>postfix;												//ºó×º±í´ïÊ½
-	print_help();															//´òÓ¡°ïÖú
+	map < string, function<double(double, double)>>map_binary_operator;		//å­˜å‚¨äºŒå…ƒè¿ç®—ç¬¦map
+	map < string, function<double(double)>>map_unary_operator;				//å‚¨å­˜ä¸€å…ƒè¿ç®—ç¬¦map
+	map_insert_fun(map_binary_operator, map_unary_operator);					//å°†å‡½æ•°æ’å…¥map
+	DequeStack<string>infix;												//ä¸­å€¼è¡¨è¾¾å¼
+	DequeStack<string>postfix;												//åç¼€è¡¨è¾¾å¼
+	print_help();															//æ‰“å°å¸®åŠ©
 	while (true) {		
-		read_infix(cin, infix);										//½«ÊäÈë±í´ïÊ½×ª±äÎªÖĞÖµ±í´ïÊ½
-		trans_posfix(infix, postfix);									//½«ÖĞÖµ±í´ïÊ½×ª±äÎªºó×º±í´ïÊ½
-		output_answer(calculat_postfix(postfix, map_binary_operator,		//¼ÆËãºó×º±í´ïÊ½
-			map_unary_operator), infix, postfix);						//Êä³ö½á¹û			
+		read_infix(cin, infix);										//å°†è¾“å…¥è¡¨è¾¾å¼è½¬å˜ä¸ºä¸­å€¼è¡¨è¾¾å¼
+		trans_posfix(infix, postfix);									//å°†ä¸­å€¼è¡¨è¾¾å¼è½¬å˜ä¸ºåç¼€è¡¨è¾¾å¼
+		output_answer(calculat_postfix(postfix, map_binary_operator,		//è®¡ç®—åç¼€è¡¨è¾¾å¼
+			map_unary_operator), infix, postfix);						//è¾“å‡ºç»“æœ			
 	}
 	return 0;
 }
